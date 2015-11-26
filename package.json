@@ -72,7 +72,6 @@
     }
   },
   "scripts": {
-    "prepublish": "cd ./files/api/admin/public && npm install && gulp dist",
     "test": "xo && cd ./files/api/admin/public && xo"
   },
   "author": {
