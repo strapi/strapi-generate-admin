@@ -1,0 +1,32 @@
+.toast-close-button {
+  -webkit-text-shadow: 0 0px 0 #ffffff;
+  text-shadow: 0 0px 0 #ffffff;
+}
+
+#toast-container > div {
+  -moz-box-shadow: 0 0 0px #999999;
+  -webkit-box-shadow: 0 0 0px #999999;
+  box-shadow: 0 0 0px #999999;
+}
+
+#toast-container > :hover {
+  -moz-box-shadow: 0 0 0px #ffffff;
+  -webkit-box-shadow: 0 0 0px #ffffff;
+  box-shadow: 0 0 0px #ffffff;
+}
+
+.toast-success {
+  background-color: $brand-success;
+}
+
+.toast-error {
+  background-color: $brand-danger;
+}
+
+.toast-info {
+  background-color: $brand-info;
+}
+
+.toast-warning {
+  background-color: $brand-warning;
+}

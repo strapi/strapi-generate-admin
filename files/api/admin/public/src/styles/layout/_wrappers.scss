@@ -1,0 +1,25 @@
+/** Blocks & wrappers **/
+.wrapper {
+  display: table;
+  width: 100%;
+}
+
+.page-wrapper {
+  padding: 15px 15px;
+  width: 100%;
+  background-color: $content-bg;
+}
+
+.action-btn-container {
+  margin-top: 25px;
+}
+
+.main-view-container {
+  min-height: 100vh;
+  width: 100%;
+  float: left;
+
+  &.page-wrapper {
+    width: calc(100% - 250px);
+  }
+}

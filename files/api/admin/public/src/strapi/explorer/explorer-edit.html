@@ -1,0 +1,190 @@
+<form novalidate data-ng-submit="ExplorerEditCtrl.onSubmit(ExplorerEditCtrl.model)" autocomplete="off">
+  <div class="row">
+
+    <div class="col-sm-6">
+      <h1 class="page-header" data-ng-if="!ExplorerEditCtrl.model.id">Create {{$stateParams.model}}</h1>
+
+      <h1 class="page-header" data-ng-if="ExplorerEditCtrl.model.id">Edit {{$stateParams.model}}</h1>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="action-btn-container pull-right">
+        <button class="btn btn-default"
+                type="button"
+                data-ng-click="ExplorerEditCtrl.resetModel(ExplorerEditCtrl.model)">Reset
+        </button>
+        <button class="btn"
+                ng-class="{'btn-default': ExplorerEditCtrl.model.id, 'btn-warning': !ExplorerEditCtrl.model.id}"
+                type="button"
+                data-ng-click="$state.go('strapi.explorer.list', {model: $stateParams.model})">Cancel
+        </button>
+        <button class="btn btn-warning"
+                data-ng-if="ExplorerEditCtrl.model.id"
+                type="button"
+                data-ng-click="ExplorerEditCtrl.deleteEntry(ExplorerEditCtrl.model)">Delete
+        </button>
+        <button data-ng-disabled="ExplorerEditCtrl.submitting"
+                data-ng-if="!ExplorerEditCtrl.model.id"
+                type="submit"
+                class="btn btn-success">Create
+        </button>
+        <button data-ng-disabled="ExplorerEditCtrl.submitting"
+                data-ng-if="ExplorerEditCtrl.model.id"
+                type="submit"
+                class="btn btn-success">Update
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <!-- Auto generated form -->
+      <formly-form model="ExplorerEditCtrl.model" fields="ExplorerEditCtrl.fields"></formly-form>
+
+      <!-- User special fields -->
+      <div ng-if="$stateParams.model === 'user'">
+        <!-- Password field -->
+        <button type="button"
+                ng-if="!ExplorerEditCtrl.displayUserPasswordField"
+                ng-click="ExplorerEditCtrl.toggleUserPasswordDisplayField()"
+                class="btn btn-xs btn-default">
+          Display password field
+        </button>
+        <div class="panel panel-default" ng-if="ExplorerEditCtrl.displayUserPasswordField">
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="userPassword">PASSWORD</label>
+              <span class="pull-right cursor-pointer" ng-click="ExplorerEditCtrl.toggleUserPasswordDisplayField()">Hide field</span>
+
+              <div class="input-group">
+                <input type="{{ExplorerEditCtrl.userPasswordInput.type}}"
+                       id="userPassword"
+                       name="userPassword"
+                       autocomplete="off"
+                       class="form-control"
+                       placeholder="Password"
+                       ng-model="ExplorerEditCtrl.model.password"/>
+                <span class="input-group-addon cursor-pointer" ng-click="ExplorerEditCtrl.generateRandomPassword()">Generate</span>
+              </div>
+              <div class="form-validation display-password-action cursor-pointer"
+                   ng-click="ExplorerEditCtrl.changeUserPasswordType()"
+                   ng-show="ExplorerEditCtrl.model.password">{{ExplorerEditCtrl.userPasswordInput.action || 'Display'}}
+                password
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- No fields -->
+      <div ng-if="!ExplorerEditCtrl.fields.length">
+        <p>No field to display.</p>
+
+        <p> In order to add fields, edit your
+          <code>api/{apiName}/models/{apiName}.json</code> file following the <a target="_blank"
+                                                                                 href="http://strapi.io/documentation/models">models
+            documentation</a>.</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+
+      <p class="bold uppercase">Manage your publication</p>
+      <ng-form>
+        <div class="panel panel-default no-padding explorer-manage">
+          <div class="panel-body">
+
+            <formly-form model="ExplorerEditCtrl.model" fields="ExplorerEditCtrl.createdUpdatedFields"></formly-form>
+            <div class="form-group" ng-if="ExplorerEditCtrl.configModel.attributes.lang">
+              <label for="lang" class="uppercase">Lang</label>
+              <select class="form-control"
+                      name="lang"
+                      id="lang"
+                      data-ng-model="ExplorerEditCtrl.model.lang"
+                      data-ng-options="value for value in configService.getConfig().settings.i18n.locales"></select>
+            </div>
+            <div class="form-group" ng-if="ExplorerEditCtrl.configModel.templates">
+              <label for="template" class="uppercase">Template</label>
+              <select class="form-control"
+                      name="template"
+                      id="template"
+                      data-ng-change="ExplorerEditCtrl.templateChanged(ExplorerEditCtrl.selectedTemplate)"
+                      data-ng-model="ExplorerEditCtrl.model.template"
+                      data-ng-options="key as key for (key , value) in ExplorerEditCtrl.configModel.templates"></select>
+            </div>
+          </div>
+        </div>
+
+        <p class="bold uppercase" ng-if="ExplorerEditCtrl.relations.length">Manage your relations</p>
+
+        <div class="panel panel-default explorer-relations"
+             ng-if="ExplorerEditCtrl.relations.length">
+          <div class="panel-body">
+            <div class="form-group"
+                 ng-repeat="relation in ExplorerEditCtrl.relations">
+              <label class="uppercase">
+                {{relation.key | humanize}}
+              </label>
+
+              <div class="pull-right">
+                <a ng-show="ExplorerEditCtrl.model[relation.key].id" class="no-border text-success explorer-see-link"
+                   data-ui-sref="strapi.explorer.list.edit({model:relation.model, entryId:ExplorerEditCtrl.model[relation.key].id})"
+                   target="_blank">SEE</a>
+                <a ng-show="relation.collection && ExplorerEditCtrl.model[relation.key]"
+                   class="no-border text-success explorer-see-link cursor-pointer" data-go-to-collection
+                   ng-click="goToCollection(ExplorerEditCtrl.model[relation.key], $stateParams.model, relation.collection, true)"
+                   target="_blank">SEE</a>
+              </div>
+
+              <div ng-if="relation.model">
+                <ui-select ng-model="ExplorerEditCtrl.model[relation.key]" theme="select2">
+                  <ui-select-match placeholder="Select {{relation.model|an}} {{relation.model}} in the list...">
+                    {{$select.selected[getDisplayedAttribute(relation, $select.selected.template)] || 'Id: ' +
+                    $item.id}}
+                  </ui-select-match>
+                  <ui-select-choices repeat="item as item in relation.suggestions"
+                                     refresh-delay="0"
+                                     refresh="ExplorerEditCtrl.refreshSuggestions(relation, $select.search, ExplorerEditCtrl.model[relation.formattedName])"
+                                     infinite-scroll-loading="relation.loading"
+                                     infinite-scroll-immediate-check="true"
+                                     infinite-scroll="ExplorerEditCtrl.refreshSuggestions(relation, $select.search, ExplorerEditCtrl.model[relation.formattedName])"
+                                     infinite-scroll-distance="2">
+                    <div>{{item[getDisplayedAttribute(relation, item.template)] || 'Id: ' + item.id}}</div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+              <div ng-if="!relation.model && relation.collection">
+                <ui-select multiple ng-model="ExplorerEditCtrl.model[relation.key]"
+                           ng-change="ExplorerEditCtrl.refreshSuggestions(relation, $select.search, ExplorerEditCtrl.model[relation.key], true)"
+                           theme="bootstrap">
+                  <ui-select-match ng-model="ExplorerEditCtrl.relation.search"
+                                   placeholder="Select {{relation.name|an}} {{relation.name}}...">
+                    <a class="no-border text-muted"
+                       data-ui-sref="strapi.explorer.list.edit({model:relation.collection, id:$item.id})"
+                       target="_blank">{{$item[getDisplayedAttribute(relation, $item.template)] || 'Id: ' +
+                      $item.id}}</a>
+                  </ui-select-match>
+                  <ui-select-choices repeat="item as item in relation.suggestions"
+                                     refresh-delay="0"
+                                     refresh="ExplorerEditCtrl.refreshSuggestions(relation, $select.search, ExplorerEditCtrl.model[relation.key])"
+                                     infinite-scroll-loading="ExplorerEditCtrl.relation.loading"
+                                     infinite-scroll-immediate-check="true"
+                                     infinite-scroll="refreshSuggestions(relation, $select.search, ExplorerEditCtrl.model[relation.formattedName])"
+                                     infinite-scroll-distance="2">
+                    <div ng-if="!item.createLink">
+                      {{item[getDisplayedAttribute(relation, item.template)] || 'Id: ' + item.id}}
+                    </div>
+                    <a class="text-white no-border"
+                       ng-if="item.createLink"
+                       target="_blank"
+                       data-ui-sref="strapi.explorer.list.create({model: relation.name})">No {{relation.name}} yet.
+                      Create</a>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-form>
+    </div>
+  </div>
+</form>

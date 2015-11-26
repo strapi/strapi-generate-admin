@@ -1,0 +1,19 @@
+/** Global structure **/
+
+html, body {
+  font-weight: 300;
+  height: 100%;
+}
+
+textarea {
+  max-width: 100%;
+  min-height: 160px;
+}
+
+a.text-muted {
+  &:visited,
+  &:focus,
+  &:active {
+    color: $gray;
+  }
+}

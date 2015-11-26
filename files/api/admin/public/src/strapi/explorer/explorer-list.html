@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-sm-4">
+    <h1 class="page-header">{{ExplorerListCtrl.configModel.identity | pluralize | capitalize}}</h1>
+  </div>
+  <div class="col-sm-8">
+    <div class="action-btn-container pull-right">
+      <button class="btn btn-default"
+              ng-click="ExplorerListCtrl.emptyFilters()">Empty filters
+      </button>
+      <button class="btn btn-default"
+              ng-click="ExplorerListCtrl.getPage()">Refresh
+      </button>
+      <button class="btn btn-success"
+              data-ui-sref="strapi.explorer.list.create({model:ExplorerListCtrl.configModel.identity})">Create
+        {{ExplorerListCtrl.configModel.identity|an}} {{ExplorerListCtrl.configModel.identity}}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row"
+     ng-show="ExplorerListCtrl.gridOptions.data.length && ExplorerListCtrl.loading === false || ExplorerListCtrl.search || ExplorerListCtrl.loading && !ExplorerListCtrl.firstLoad">
+  <div class="col-sm-12">
+    <div class="form-group">
+      <label for="search">Search</label>
+      <input type="text"
+             name="search"
+             id="search"
+             class="form-control"
+             ng-change="ExplorerListCtrl.searchChanged()"
+             ng-model="ExplorerListCtrl.search"
+             placeholder="Search by {{ExplorerListCtrl.displayedAttributes.length ? ExplorerListCtrl.displayedAttributes.join(' or ') + ' or ' : ''}}id"/>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <p ng-if="ExplorerListCtrl.loading && ExplorerListCtrl.firstLoad">
+      Loading...
+    </p>
+
+    <p
+      ng-if="!ExplorerListCtrl.gridOptions.data.length && ExplorerListCtrl.loading === false && !ExplorerListCtrl.search">
+      No {{ExplorerListCtrl.configModel.identity ? ExplorerListCtrl.configModel.identity : 'entry'}} yet.
+      <a data-ui-sref="strapi.explorer.list.create({model:$stateParams.model})">Create a new one.</a>
+    </p>
+
+    <p
+      ng-if="!ExplorerListCtrl.gridOptions.data.length && ExplorerListCtrl.loading === false && ExplorerListCtrl.search">
+      No results.
+    </p>
+
+    <div id="explorer-grid-container"
+         class="explorer-grid-container"
+         ng-show="ExplorerListCtrl.gridOptions.data.length || (ExplorerListCtrl.loading !== true && ExplorerListCtrl.loading !== false)"
+         ng-class="{'loading': ExplorerListCtrl.loading}">
+      <div ui-grid="ExplorerListCtrl.gridOptions"
+           ui-grid-pagination
+           ui-grid-resize-columns
+           ui-grid-move-columns
+           ui-grid-auto-resize
+           ng-style="ExplorerListCtrl.getTableStyle()"
+           class="grid"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+{
+  "name": "strapi-admin",
+  "private": false,
+  "scripts": {
+    "start": "gulp watch",
+    "test": "xo",
+    "postinstall": "bower install"
+  },
+  "dependencies": {
+    "bower": "^1.6.5",
+    "connect-history-api-fallback": "^1.1.0",
+    "event-stream": "^3.3.2",
+    "gulp": "^3.9.0",
+    "gulp-angular-filesort": "^1.1.1",
+    "gulp-bower-files": "^0.2.7",
+    "gulp-cached": "^1.1.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-embedlr": "^0.5.2",
+    "gulp-filter": "^3.0.1",
+    "gulp-header": "^1.7.1",
+    "gulp-htmlmin": "^1.2.0",
+    "gulp-inject": "^3.0.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-ng-annotate": "^1.1.0",
+    "gulp-ng-html2js": "^0.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace-task": "^0.11.0",
+    "gulp-sass": "^2.1.0",
+    "gulp-serve": "^1.2.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.8.0",
+    "jshint-stylish": "^2.1.0",
+    "lazypipe": "^1.0.1",
+    "sort-stream": "^1.0.1",
+    "streamqueue": "^1.1.1",
+    "tiny-lr": "^0.2.1"
+  },
+  "devDependencies": {
+    "xo": "^0.9.0"
+  },
+  "xo": {
+    "space": true,
+    "esnext": false,
+    "envs": [
+      "node",
+      "mocha"
+    ],
+    "globals": [
+      "angular",
+      "_",
+      "window",
+      "document"
+    ],
+    "ignores": [
+      "./tmp/**",
+      "config/**",
+      "dist/**",
+      "node_modules/**",
+      "bower_components/**",
+      "coverage/**",
+      "test/**"
+    ],
+    "rules": {
+      "consistent-return": 0,
+      "consistent-this": 0,
+      "dot-notation": 0,
+      "global-require": 0,
+      "max-nested-callbacks": [
+        1,
+        6
+      ],
+      "no-else-return": 0,
+      "no-extra-parens": 0,
+      "no-implicit-coercion": 0,
+      "no-inline-comments": 0,
+      "no-invalid-this": 0,
+      "no-throw-literal": 0,
+      "no-unneeded-ternary": 0,
+      "no-unused-expressions": 0,
+      "padded-blocks": 0,
+      "prefer-arrow-callback": 0,
+      "prefer-reflect": 0,
+      "prefer-template": 0,
+      "quote-props": 0,
+      "strict": 0
+    }
+  }
+}

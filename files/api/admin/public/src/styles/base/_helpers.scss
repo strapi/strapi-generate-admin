@@ -1,0 +1,79 @@
+// Align text.
+.text-center {
+  text-align: center;
+}
+
+// Display the cursor as pointer.
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// Remove padding.
+.no-padding {
+  padding: 0;
+}
+
+// TODO: remove that.
+.margin-top {
+  margin-top: 100px;
+}
+
+// Simply change the color of the text to white.
+.text-white,
+.text-white:hover,
+.text-white:focus,
+.text-white:active,
+.text-white:visited {
+  color: #ffffff;
+
+  &:hover {
+    border-bottom: 1px #ffffff dotted;
+  }
+}
+
+// Remove the borders of an item.
+.no-border, a.no-border,
+.no-border:focus, a.no-border:focus,
+.no-border:hover, a.no-border:hover {
+  border: none;
+}
+
+// Stop floating.
+.float-none {
+  float: none;
+}
+
+// Float left.
+.float-left {
+  float: left;
+}
+
+// Set the background color using the color of the sidebar menu.
+.bg-sidebar {
+  background-color: $sidebar-bg;
+}
+
+// Bold font weight.
+.bold {
+  font-weight: 400;
+}
+
+// Uppercase the text.
+.uppercase {
+  text-transform: uppercase;
+}
+
+// Display as block.
+.block {
+  display: block;
+}
+
+// Expose the `clearfix` mixin as class.
+.clearfix {
+  @include clearfix;
+}
+
+// Display as `table-row`
+.table-row {
+  display: table-row;
+}

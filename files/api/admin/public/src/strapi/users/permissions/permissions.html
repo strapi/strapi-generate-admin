@@ -1,0 +1,93 @@
+<form novalidate class="permissions">
+  <div class="row">
+
+    <div class="col-sm-8">
+      <h1 class="page-header">Permissions</h1>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="pull-right action-btn-container">
+        <button class="btn btn-default"
+                type="button"
+                data-ng-click="UsersPermissionsCtrl.cancel()">Cancel
+        </button>
+        <button class="btn btn-success"
+                type="button"
+                data-ng-click="UsersPermissionsCtrl.update()">Update
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-4">
+      <ul class="list-inline">
+        <li ng-style="{width: UsersPermissionsCtrl.colWidth}"
+            class="text-center"><strong>Public</strong></li>
+        <li ng-style="{width: UsersPermissionsCtrl.colWidth}"
+            class="text-center"><strong>Is Contributor</strong></li>
+        <li ng-style="{width: UsersPermissionsCtrl.colWidth}"
+            class="text-center"><strong>Registered</strong></li>
+        <li ng-repeat="role in UsersPermissionsCtrl.roles"
+            ng-style="{width: UsersPermissionsCtrl.colWidth}"
+            class="text-center"><strong>{{role.name | capitalize}}</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel-group" role="tablist">
+    <div class="panel" ng-repeat="(key, routes) in UsersPermissionsCtrl.routes | orderBy:route.verb">
+      <div class="panel-heading cursor-pointer" role="tab" ng-click="UsersPermissionsCtrl.collapse(key)">
+        <h4 class="panel-title">
+          <a class="no-border">{{key|capitalize}}</a>
+        </h4>
+      </div>
+      <ul class="list-group" uib-collapse="UsersPermissionsCtrl.collapsedBooleans[key]">
+        <li class="list-group-item" ng-repeat="route in routes">
+          <div class="row">
+            <div class="col-sm-4">
+              <kbd class="{{UsersPermissionsCtrl.getRouteClass(route.verb)}}">{{route.verb | uppercase}}</kbd>
+              <code>{{route.path}}</code>
+            </div>
+            <div class="col-sm-8">
+              <div class="row">
+                <div ng-style="{width: UsersPermissionsCtrl.colWidth}"
+                     class="float-left text-center checkbox-container">
+                  <strapi-switch id="isPublic"
+                                 name="isPublic"
+                                 ng-model="route.isPublic"
+                                 class="green">
+                  </strapi-switch>
+                </div>
+                <div ng-style="{width: UsersPermissionsCtrl.colWidth}"
+                     class="float-left text-center checkbox-container clearfix">
+                  <strapi-switch id="contributorsAuthorized"
+                                 name="contributorsAuthorized"
+                                 ng-model="route.contributorsAuthorized"
+                                 ng-show="!route.isPublic && _.includes(route.policies, 'isAuthorized')"
+                                 class="green">
+                  </strapi-switch>
+                </div>
+                <div ng-style="{width: UsersPermissionsCtrl.colWidth}"
+                     class="float-left text-center checkbox-container">
+                  <strapi-switch ng-model="route.registeredAuthorized"
+                                 ng-show="!route.isPublic && (!route.contributorsAuthorized || !_.includes(route.policies, 'isAuthorized')) && (_.includes(route.policies, 'isAuthorized') || _.includes(route.policies, 'authenticated'))">
+                    class="green">
+                  </strapi-switch>
+                </div>
+                <div ng-style="{width: UsersPermissionsCtrl.colWidth}"
+                     class="float-left text-center checkbox-container"
+                     ng-repeat="role in UsersPermissionsCtrl.roles">
+                  <strapi-switch ng-disabled="UsersPermissionsCtrl.roles.length - 1 === $index"
+                                 ng-model="route.roles[$index].enabled"
+                                 class="green">
+                  </strapi-switch>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</form>

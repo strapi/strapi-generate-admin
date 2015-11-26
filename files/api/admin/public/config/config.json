@@ -1,0 +1,16 @@
+{
+  "development": {
+    "frontendUrl": "http://localhost:3002",
+    "backendUrl": "http://localhost:1337"
+  },
+  "production": {
+    "frontendUrl": "/admin",
+    "backendUrl": ""
+  },
+  "frontend": {
+    "ports": {
+      "production": 3000,
+      "development": 3002
+    }
+  }
+}

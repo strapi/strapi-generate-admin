@@ -1,0 +1,29 @@
+<div class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+  <div class="navbar-header">
+    <a class="navbar-brand no-border" data-ui-sref="strapi.dashboard">
+      <img ng-src="{{Config.frontendUrl}}/assets/images/logo.png" class="img-responsive logo center-block" alt="Logo"/>
+    </a>
+  </div>
+
+  <div class="navbar-links-container">
+    <ul class="nav navbar-top-links navbar-right">
+      <li class="dropdown navbar-user" uib-dropdown is-open="false">
+        <a class="dropdown-toggle cursor-pointer no-border navbar-user-dropdown" uib-dropdown-toggle>
+          <img class="navbar-user-img" ng-src="{{Config.frontendUrl}}/assets/images/user-picture.png"
+               alt="User profile"/>
+          {{user().username}} <i class="fa fa-angle-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user" role="menu">
+          <li><a data-ui-sref="strapi.explorer.list.edit({model:'user',entryId:user().id})"><i
+            class="fa fa-user fa-fw"></i> User
+            Profile</a>
+          </li>
+          <li class="divider"></li>
+          <li class="cursor-pointer"><a data-ng-click="HeaderCtrl.logout()"><i class="fa fa-sign-out fa-fw"></i>
+            Logout</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
