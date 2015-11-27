@@ -139,7 +139,7 @@
                 <ui-select ng-model="ExplorerEditCtrl.model[relation.key]" theme="select2">
                   <ui-select-match placeholder="Select {{relation.model|an}} {{relation.model}} in the list...">
                     {{$select.selected[getDisplayedAttribute(relation, $select.selected.template)] || 'Id: ' +
-                    $item.id}}
+                    $select.selected.id}}
                   </ui-select-match>
                   <ui-select-choices repeat="item as item in relation.suggestions"
                                      refresh-delay="0"
