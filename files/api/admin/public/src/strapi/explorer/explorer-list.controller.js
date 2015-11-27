@@ -366,7 +366,7 @@
           if (value.model) {
             column.visible = true;
             column.enableSorting = false;
-            column.cellTemplate = '<div class="ui-grid-cell-contents"><a data-ui-sref="strapi.explorer.list.edit({model: \'' + value.model + '\',entryId:COL_FIELD.id})">{{COL_FIELD[\'' + configService.getConfig().models[value.model].displayedAttribute + '\'] CUSTOM_FILTERS}}</a></div>';
+            column.cellTemplate = '<div class="ui-grid-cell-contents"><a data-ui-sref="strapi.explorer.list.edit({model: \'' + value.model + '\',entryId:COL_FIELD.id})">{{COL_FIELD[\'' + configService.getConfig().models[value.model].displayedAttribute + '\' || \'id\'] CUSTOM_FILTERS}}</a></div>';
           }
           if (value.collection) {
             column.visible = true;
