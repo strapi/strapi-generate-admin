@@ -41,14 +41,8 @@
       $sessionStorage.appUrl = appUrl ? appUrl : $sessionStorage.appUrl;
       appUrl = $sessionStorage.appUrl;
 
-      if (firstLoad && !appUrl) {
-        messageService.warning('You app URL has been set as `http://localhost:1337` by default. To change it, please update it in the Studio.', 'Warning', {
-          timeOut: 10000
-        });
-      }
-
       // Set the default appUrl.
-      appUrl = appUrl ? appUrl : 'http://localhost:1337';
+      appUrl = appUrl ? appUrl : Config.backendUrl;
       $sessionStorage.appUrl = appUrl;
 
       // Get the config of the app.
