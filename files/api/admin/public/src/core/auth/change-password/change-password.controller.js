@@ -53,6 +53,7 @@
         templateOptions: {
           type: 'password',
           label: '',
+          focus: true,
           placeholder: 'Password (min. 8 charachters)',
           minlength: 6,
           addonLeft: {
@@ -65,7 +66,6 @@
         templateOptions: {
           type: 'password',
           label: '',
-          focus: true,
           placeholder: 'Confirm Password',
           minlength: 6,
           addonLeft: {

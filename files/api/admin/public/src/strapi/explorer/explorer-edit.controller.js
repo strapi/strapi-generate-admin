@@ -18,7 +18,8 @@
     'userService',
     'stringService',
     'Config',
-    '$http'];
+    '$http',
+    '$localStorage'];
 
   function ExplorerEditController(_entry,
                                   explorerService,
@@ -34,7 +35,8 @@
                                   userService,
                                   stringService,
                                   Config,
-                                  $http) {
+                                  $http,
+                                  $localStorage) {
 
     // Init variables.
     var vm = this;
@@ -187,6 +189,11 @@
             $state.go('strapi.explorer.list', {
               model: configModel.identity
             });
+
+            // Update registered user username.
+            if ($state.params.model === 'user' && userService.user().id === response.data.id) {
+              $localStorage.credentials.user = response.data;
+            }
           })
           .catch(function error() {
             vm.submitting = false;
