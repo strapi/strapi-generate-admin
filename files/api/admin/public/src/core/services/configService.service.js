@@ -4,9 +4,9 @@
   angular.module('frontend.core.services')
     .factory('configService', configService);
 
-  configService.$inject = ['$http', 'Config', 'messageService', '$sessionStorage', '$q', '$state'];
+  configService.$inject = ['$http', 'Config', 'messageService', '$sessionStorage', '$q', '$state', 'authService'];
 
-  function configService($http, Config, messageService, $sessionStorage, $q, $state) {
+  function configService($http, Config, messageService, $sessionStorage, $q, $state, authService) {
     var config = {};
     var firstLoad = true;
     var service = {
@@ -72,9 +72,16 @@
 
         deferred.resolve();
       })
-        .catch(function () {
-          // App is offline.
-          if (firstLoad) {
+        .catch(function (response) {
+          if (response.data && response.data.message) {
+            // User is not admin.
+            $state.go('auth.login');
+            messageService.error(response.data && response.data.message, 'Error', {
+              timeOut: 60000
+            });
+            authService.logout();
+          } else if (firstLoad) {
+            // App is offline.
             messageService.error('Your app looks offline, please start it and reload this page.', 'Error', {
               timeOut: 60000
             });
