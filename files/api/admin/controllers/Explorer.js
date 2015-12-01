@@ -46,6 +46,11 @@ module.exports = {
 
   // Update a specific entry.
   update: function * () {
+    // Password encryption for `user` model.
+    if (this.params.model === 'user' && this.request.body.password) {
+      this.request.body.password = yield strapi.api.user.services.user.hashPassword(this.request.body.password);
+    }
+
     try {
       const entry = yield strapi.hooks.blueprints.update(this);
       this.body = entry;
