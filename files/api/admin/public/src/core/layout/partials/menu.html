@@ -1,0 +1,39 @@
+<div class="navbar-default sidebar active" id="menu" role="navigation" ng-controller="MenuController as MenuCtrl">
+  <div class="sidebar-nav navbar-collapse">
+    <ul class="nav" id="side-menu">
+      <li>
+        <a data-ui-sref-active="active" data-ui-sref="strapi.dashboard" ng-click="MenuCtrl.expand('dashboard')">
+          <i class="fa fa-dashboard"></i> <span class="title">Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a class="parent-link cursor-pointer" ng-class="{active: !MenuCtrl.collapsedBooleans['explorer']}"
+           ng-click="MenuCtrl.expand('explorer')">
+          <i class="fa fa-cubes"></i> <span class="title">Models</span> <span class="fa arrow"></span></span>
+        </a>
+        <ul class="nav nav-second-level" ng-class="{open: !MenuCtrl.collapsedBooleans['explorer']}"
+            uib-collapse="MenuCtrl.collapsedBooleans['explorer']">
+          <li data-ng-repeat="link in MenuCtrl.menuLinks.models">
+            <a data-ui-sref="strapi.explorer.list({model:link.model})" data-ui-sref-opts="{inherit: false}"
+               data-ui-sref-active="active">{{ link.model | pluralize | humanize | capitalize }}</a>
+          </li>
+          <li data-ng-if="!MenuCtrl.menuLinks.models.length"><a data-ui-sref-active="active"
+                                                                data-ui-sref="strapi.explorer.home">No model yet</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a class="parent-link cursor-pointer" ng-class="{active: !MenuCtrl.collapsedBooleans['users']}"
+           ng-click="MenuCtrl.expand('users')">
+          <i class="fa fa-users"></i> <span class="title">Users</span> <span class="fa arrow"></span></span>
+        </a>
+        <ul class="nav nav-second-level" ng-class="{open: !MenuCtrl.collapsedBooleans['users']}"
+            uib-collapse="MenuCtrl.collapsedBooleans['users']">
+          <li><a data-ui-sref-active="active" data-ui-sref="strapi.explorer.list({model:'user'})">List of users</a></li>
+          <li><a data-ui-sref-active="active" data-ui-sref="strapi.explorer.list({model:'role'})">Roles</a></li>
+          <li><a data-ui-sref-active="active" data-ui-sref="strapi.users.permissions">Permissions</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

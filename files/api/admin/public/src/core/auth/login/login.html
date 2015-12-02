@@ -1,0 +1,33 @@
+<div class="row margin-top login">
+  <div class="col-sm-4 col-sm-offset-4">
+    <div class="login-panel panel panel-success">
+      <div class="panel-heading bg-success">
+        <div class="center-block logo-container">
+          <h3 class="panel-title">
+            <img class="img-responsive center-block"
+                 ng-src="{{Config.frontendUrl}}/assets/images/logo.png"
+                 alt="Logo"/>
+          </h3>
+        </div>
+      </div>
+      <div class="panel-body">
+        <h1 class="h3">Login</h1>
+
+        <form name="LoginCtrl.loginForm" novalidate>
+
+          <formly-form model="LoginCtrl.credentials" fields="LoginCtrl.fields"></formly-form>
+
+          <p class="auth-forgot">
+            <a href="#" data-ui-sref="auth.forgotPassword">Forgot Password?</a>
+          </p>
+
+          <button class="btn btn-default btn-block"
+                  type="submit"
+                  data-ng-click="LoginCtrl.action()"
+                  data-ng-disabled="LoginCtrl.loading">Login
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

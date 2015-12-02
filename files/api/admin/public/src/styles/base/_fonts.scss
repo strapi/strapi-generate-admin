@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('@@frontendUrl/fonts/fontawesome-webfont.eot?v=4.3.0');
+  src: url('@@frontendUrl/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'), url('@@frontendUrl/fonts/fontawesome-webfont.woff2?v=4.3.0') format('woff2'), url('@@frontendUrl/fonts/fontawesome-webfont.woff?v=4.3.0') format('woff'), url('@@frontendUrl/fonts/fontawesome-webfont.ttf?v=4.3.0') format('truetype'), url('@@frontendUrl/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ui-grid';
+  src: url('@@frontendUrl/fonts/ui-grid.eot');
+  src: url('@@frontendUrl/fonts/ui-grid.eot#iefix') format('embedded-opentype'), url('@@frontendUrl/fonts/ui-grid.woff') format('woff'), url('@@frontendUrl/fonts/ui-grid.ttf') format('truetype'), url('@@frontendUrl/fonts/ui-grid.svg?#ui-grid') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

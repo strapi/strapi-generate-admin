@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html data-ng-app="frontend">
+<head>
+  <meta charset="utf-8"/>
+  <title>Strapi Admin Panel</title>
+  <base href="/admin/">
+  <link rel="icon" href="/assets/images/favicon.ico"/>
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png"/>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700'
+        rel='stylesheet' type='text/css'>
+
+  <!-- inject:vendor:css -->
+  <!-- endinject -->
+
+  <!-- inject:css -->
+  <!-- endinject -->
+
+  <script>
+    (function onLoad() {
+      window.backendUrl = '@@backendUrl';
+      window.frontendUrl = '@@frontendUrl';
+    })();
+  </script>
+
+  <!-- inject:vendor:js -->
+  <!-- endinject -->
+
+  <!-- inject:js -->
+  <!-- endinject -->
+
+
+</head>
+<body data-ng-cloak class="ng-cloak" class="error-body">
+
+<header data-ui-view="header"></header>
+
+<div id="wrapper" class="wrapper">
+  <div class="table-row">
+    <div class="sidebar-container" data-ng-class="{'out-dashboard': !$state.includes('strapi')}"
+         data-ui-view="sidebar"></div>
+
+    <div data-ng-class="{'page-wrapper': $state.includes('strapi')}" class="main-view-container bg-sidebar">
+      <div class="ui-view-container container-fluid"
+           data-ui-view="content">
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

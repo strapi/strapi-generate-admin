@@ -1,0 +1,27 @@
+// Themes
+@import "styles/themes/bootstrap/bootstrap";
+@import "styles/themes/toastr/toastr";
+@import "styles/themes/ui-bootstrap/datepicker";
+@import "styles/themes/ui-select/ui-select";
+@import "styles/themes/angular-loading-bar/angular-loading-bar";
+// Base
+@import "styles/base/variables";
+@import "styles/base/helpers";
+@import "styles/base/fonts";
+@import "styles/base/base";
+// Layout
+@import "styles/layout/header";
+@import "styles/layout/sidebar";
+@import "styles/layout/wrappers";
+@import "styles/layout/ui-view-container";
+// Modules
+@import "styles/modules/forms";
+// Core
+// - Directives
+@import "core/directives/strapi-switch/strapi-switch";
+// States
+// App
+@import "strapi/explorer/explorer";
+@import "strapi/users/permissions/permissions";
+@import "core/auth/auth";
+

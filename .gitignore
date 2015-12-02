@@ -107,3 +107,6 @@ coverage
 ############################
 
 bower
+bower_components
+.tmp
+dist

@@ -1,0 +1,31 @@
+<div class="row margin-top register">
+  <div class="col-sm-4 col-sm-offset-4">
+    <div class="login-panel panel panel-success">
+      <div class="panel-heading bg-success">
+        <div class="center-block logo-container">
+          <h3 class="panel-title">
+            <img class="img-responsive center-block"
+                 ng-src="{{Config.frontendUrl}}/assets/images/logo.png"
+                 alt="Logo"/>
+          </h3>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="text-center">
+          <h1 class="h3">Welcome</h1>
+          <p>Please fill out this form to create your first user.
+            This user will have the root permissions (full-access) to the application.
+          </p>
+        </div>
+        <form name="RegisterCtrl.registrationForm" novalidate>
+          <formly-form model="RegisterCtrl.user" fields="RegisterCtrl.fields"></formly-form>
+          <button class="btn btn-default btn-block"
+                  type="submit"
+                  data-ng-click="RegisterCtrl.action()"
+                  data-ng-disabled="RegisterCtrl.loading">Register
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
