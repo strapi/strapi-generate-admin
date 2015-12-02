@@ -46,9 +46,13 @@ module.exports = {
 
   // Update a specific entry.
   update: function * () {
-    // Password encryption for `user` model.
-    if (this.params.model === 'user' && this.request.body.password) {
-      this.request.body.password = yield strapi.api.user.services.user.hashPassword(this.request.body.password);
+    // Throw an error if the password selected by the user
+    // contains more than two times the symbol '$'.
+    if (this.params.model === 'user' && this.request.body.password && strapi.api.user.services.user.isHashed(this.request.body.password)) {
+      this.status = 400;
+      return this.body = {
+        message: 'Your password can not contain more than three times the symbol `$`.'
+      };
     }
 
     try {
