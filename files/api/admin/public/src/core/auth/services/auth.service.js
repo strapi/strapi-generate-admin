@@ -7,9 +7,9 @@
   angular.module('frontend.core.auth.services')
     .factory('authService', authService);
 
-  authService.$inject = ['$http', '$state', '$localStorage', 'AccessLevels', 'Config', 'messageService', '$location'];
+  authService.$inject = ['$http', '$state', '$localStorage', 'AccessLevels', 'Config', 'messageService', '$location', 'initService', '$injector'];
 
-  function authService($http, $state, $localStorage, AccessLevels, Config, messageService, $location) {
+  function authService($http, $state, $localStorage, AccessLevels, Config, messageService, $location, initService, $injector) {
 
     var service = {
       authorize: authorize,
@@ -64,7 +64,10 @@
         withCredentials: true
       })
         .then(function (response) {
-          messageService.success('You have been logged in.');
+          var configService = $injector.get('configService');
+          configService.getApp(undefined, true).then(function () {
+            messageService.success('You have been logged in.');
+          });
 
           $localStorage.credentials = response.data;
         });

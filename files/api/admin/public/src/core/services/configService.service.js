@@ -29,10 +29,11 @@
     /**
      * Gey the config of the app from its API.
      *
-     * @param appUrl
+     * @param {String}   appUrl
+     * @param {Boolean}  ignoreError
      * @returns {*}
      */
-    function getApp(appUrl) {
+    function getApp(appUrl, ignoreError) {
 
       // Init promise.
       var deferred = $q.defer();
@@ -76,9 +77,11 @@
           if (response.data && response.data.message) {
             // User is not admin.
             $state.go('auth.login');
-            messageService.error(response.data && response.data.message, 'Error', {
-              timeOut: 60000
-            });
+            if (!ignoreError) {
+              messageService.error(response.data && response.data.message, 'Error', {
+                timeOut: 60000
+              });
+            }
             authService.logout();
           } else if (firstLoad) {
             // App is offline.
