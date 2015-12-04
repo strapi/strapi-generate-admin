@@ -102,7 +102,7 @@
      * @param {String} email
      */
     function forgotPassword(email) {
-      var changePasswordUrl = $location.$$protocol + '://' + $location.$$host + ':' + $location.$$port + '/#!/forgot-password/change-password';
+      var changePasswordUrl = $location.$$protocol + '://' + $location.$$host + ':' + $location.$$port + '/admin/#!/forgot-password/change-password';
 
       return $http.post(Config.backendUrl + '/auth/forgot-password', {
         email: email,
