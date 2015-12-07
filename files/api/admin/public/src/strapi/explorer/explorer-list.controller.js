@@ -20,7 +20,8 @@
     '$q',
     '$http',
     'Config',
-    '$scope'];
+    '$scope',
+    'userService'];
 
   function ExplorerListController($stateParams,
                                   configService,
@@ -34,7 +35,8 @@
                                   $q,
                                   $http,
                                   Config,
-                                  $scope) {
+                                  $scope,
+                                  userService) {
 
     // Init variables.
     var vm = this;
@@ -230,6 +232,18 @@
     }
 
     /**
+     * Prevent user auto-deletion.
+     *
+     * @param entryId
+     * @returns {boolean}
+     */
+    function hideDeleteButton(entryId) {
+      var isUserModel = vm.configModel.identity === 'user';
+      var currentUserId = userService.user().id;
+      return isUserModel && entryId === currentUserId;
+    }
+
+    /**
      * First function launched.
      *
      * @private
@@ -246,6 +260,7 @@
 
       // Here we have to use the `$scope` because of the `angular-ui-grid` module.
       $scope.deleteEntry = deleteEntry;
+      $scope.hideDeleteButton = hideDeleteButton;
 
       // Init a new instance of the `DataModel` service.
       dataModel = new DataModel('admin/explorer/' + vm.configModel.identity);
@@ -409,7 +424,7 @@
         columns.push({
           cellTemplate: '<div class="ui-grid-cell-contents text-center">' +
           '<button class="explorer-action-btn btn btn-success btn-sm" data-ui-sref="strapi.explorer.list.edit({model:\'' + vm.configModel.identity + '\', entryId: row.entity.id})">Edit</button>' +
-          '<button class="explorer-action-btn btn btn-warning btn-sm" data-ng-click="grid.appScope.deleteEntry(row.entity.id, row)">Delete</button>' +
+          '<button ng-hide="grid.appScope.hideDeleteButton(row.entity.id)" class="explorer-action-btn btn btn-warning btn-sm" data-ng-click="grid.appScope.deleteEntry(row.entity.id, row)">Delete</button>' +
           '</div>',
           enableSorting: false,
           field: 'Actions'

@@ -19,7 +19,7 @@
                 data-ng-click="$state.go('strapi.explorer.list', {model: $stateParams.model})">Cancel
         </button>
         <button class="btn btn-warning"
-                data-ng-if="ExplorerEditCtrl.model.id"
+                data-ng-if="ExplorerEditCtrl.model.id && ($stateParams.model !== 'user' || user().id !== ExplorerEditCtrl.model.id)"
                 type="button"
                 data-ng-click="ExplorerEditCtrl.deleteEntry(ExplorerEditCtrl.model)">Delete
         </button>
