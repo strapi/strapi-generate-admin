@@ -277,7 +277,10 @@
           param = JSON.parse(param);
         } catch (err) {
         }
-        loadParams[key] = isNaN(param) ? param : Number(param);
+
+        if (param) {
+          loadParams[key] = isNaN(param) ? param : Number(param);
+        }
       });
       loadParams.sort = paginationOptions.sortColumn + ' ' + paginationOptions.sort;
       loadParams.where = loadParams.where ? loadParams.where : $stateParams.where;
