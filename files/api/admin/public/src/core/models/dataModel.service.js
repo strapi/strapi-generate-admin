@@ -321,11 +321,7 @@
           }
 
           return self.object;
-        },
-        function onError(error) {
-          $log.error('Model.fetch() failed.', error, self.endpoint, identifier, parameters);
-        }
-      );
+        });
     };
 
     /**
@@ -345,11 +341,7 @@
         .then(
         function onSuccess(result) {
           return result;
-        },
-        function onError(error) {
-          $log.error('Model.create() failed.', error, self.endpoint, data);
-        }
-      );
+        });
     };
 
     /**
@@ -370,11 +362,7 @@
         .then(
         function onSuccess(result) {
           return result;
-        },
-        function onError(error) {
-          $log.error('Model.update() failed.', error, self.endpoint, identifier, data);
-        }
-      );
+        });
     };
 
     /**
@@ -394,11 +382,7 @@
         .then(
         function onSuccess(result) {
           return result;
-        },
-        function onError(error) {
-          $log.error('Model.delete() failed.', error, self.endpoint, identifier);
-        }
-      );
+        });
     };
 
     return Model;
