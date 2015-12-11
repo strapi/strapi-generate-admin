@@ -58,7 +58,7 @@
           placeholder: 'Email or username',
           label: '',
           focus: true,
-          minlength: 6,
+          minlength: 3,
           addonLeft: {
             class: 'fa fa-user'
           }
