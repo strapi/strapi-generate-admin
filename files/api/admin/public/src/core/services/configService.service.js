@@ -29,33 +29,21 @@
     /**
      * Gey the config of the app from its API.
      *
-     * @param {String}   appUrl
      * @param {Boolean}  ignoreError
      * @returns {*}
      */
-    function getApp(appUrl, ignoreError) {
+    function getApp(ignoreError) {
 
       // Init promise.
       var deferred = $q.defer();
 
-      // Set the appUrl in the local storage.
-      $sessionStorage.appUrl = appUrl ? appUrl : $sessionStorage.appUrl;
-      appUrl = $sessionStorage.appUrl;
-
-      // Set the default appUrl.
-      appUrl = appUrl ? appUrl : Config.backendUrl;
-      $sessionStorage.appUrl = appUrl;
-
       // Get the config of the app.
       $http({
         method: 'GET',
-        url: appUrl + '/admin/config'
+        url: Config.backendUrl + '/admin/config'
       }).then(function (response) {
         // Set the config.
         config = response.data;
-
-        // Set the backend url in Config object.
-        Config.backendUrl = response.data.settings && response.data.settings.url || Config.backendUrl;
 
         // Set the isNewApp value in configService object.
         config.isNewApp = response.data.settings && response.data.settings.isNewApp;

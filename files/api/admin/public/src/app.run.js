@@ -19,8 +19,7 @@
     'Config',
     'initService',
     'userService',
-    'layoutService',
-    '$location'];
+    'layoutService'];
 
   function run($rootScope,
                $state,
@@ -34,8 +33,7 @@
                Config,
                initService,
                userService,
-               layoutService,
-               $location) {
+               layoutService) {
 
     // Set global variable
     $rootScope.auth = authService;
@@ -47,14 +45,11 @@
     $rootScope.user = userService.user;
     $rootScope._ = _;
 
-    // Get app config from app url (eg. http://localhost:1337).
-    configService.getApp($location.search().url)
+    // Get app config.
+    configService.getApp()
       .then(function () {
         initService.deferred.resolve();
       });
-
-    // Remove `appUrl` parameter.
-    $location.search('appUrl', undefined);
 
     /**
      * Route state change start event, this is needed for following:
