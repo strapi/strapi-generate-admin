@@ -9,7 +9,7 @@
    */
   angular.module('frontend')
     .constant('Config', {
-      backendUrl: window.backendUrl,
+      backendUrl: window.backendUrl || window.location.origin,
       frontendUrl: window.frontendUrl
     });
 })();

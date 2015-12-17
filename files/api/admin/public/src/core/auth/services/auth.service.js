@@ -65,7 +65,7 @@
       })
         .then(function (response) {
           var configService = $injector.get('configService');
-          configService.getApp(undefined, true).then(function () {
+          configService.getApp(true).then(function () {
             messageService.success('You have been logged in.');
           });
 
