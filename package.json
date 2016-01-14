@@ -1,6 +1,6 @@
 {
   "name": "strapi-generate-admin",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Generate the default admin panel for a Strapi application.",
   "homepage": "http://strapi.io",
   "keywords": [
