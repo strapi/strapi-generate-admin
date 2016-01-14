@@ -11,7 +11,7 @@
     '$locationProvider',
     '$urlRouterProvider',
     '$httpProvider',
-    '$tooltipProvider',
+    '$uibTooltipProvider',
     'cfpLoadingBarProvider',
     'toastrConfig',
     '$urlMatcherFactoryProvider'];
@@ -20,7 +20,7 @@
                   $locationProvider,
                   $urlRouterProvider,
                   $httpProvider,
-                  $tooltipProvider,
+                  $uibTooltipProvider,
                   cfpLoadingBarProvider,
                   toastrConfig,
                   $urlMatcherFactoryProvider) {
@@ -29,12 +29,12 @@
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-    // Add interceptors for $httpProvider and $sailsSocketProvider.
+    // Add interceptors for $httpProvider.
     $httpProvider.interceptors.push('AuthInterceptor');
     $httpProvider.interceptors.push('ErrorInterceptor');
 
     // Set tooltip options.
-    $tooltipProvider.options({
+    $uibTooltipProvider.options({
       appendToBody: true
     });
 
