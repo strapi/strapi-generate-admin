@@ -23,6 +23,7 @@ var g = require('gulp-load-plugins')({
 
 // Needed.
 var settings;
+var configGeneralFile;
 var noop = g.util.noop;
 var isWatching = false;
 var environment = 'development';
@@ -34,8 +35,26 @@ var htmlminOpts = {
   removeRedundantAttributes: true
 };
 
-// Try to read frontend configuration file, fallback to default file
+// Try to read frontend configuration file.
 settings = JSON.parse(fs.readFileSync('./config/config.json', 'utf8'));
+
+// API Prefix.
+try {
+  // Try to read `/config/general.json` file of the Strapi app.
+  configGeneralFile = fs.readFileSync('../../../config/general.json', 'utf8');
+
+  // Parse JSON.
+  configGeneralFile = JSON.parse(configGeneralFile);
+
+  var apiPrefix = configGeneralFile.prefix;
+
+  if (apiPrefix) {
+    settings.development.backendUrl = apiPrefix;
+    settings.production.backendUrl = apiPrefix;
+  }
+} catch (err) {
+  // Unable to read the `/config/general.json` file of the Strapi app.
+}
 
 /**
  * JS Hint
