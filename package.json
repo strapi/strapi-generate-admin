@@ -89,10 +89,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/wistityhq/strapi-generate-admin.git"
+    "url": "git://github.com/strapi/strapi-generate-admin.git"
   },
   "bugs": {
-    "url": "https://github.com/wistityhq/strapi/issues"
+    "url": "https://github.com/strapi/strapi/issues"
   },
   "license": "MIT"
 }
